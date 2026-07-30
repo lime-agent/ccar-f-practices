@@ -1,0 +1,4 @@
+# 실습 클라이언트: anthropic SDK의 AnthropicBedrock (시험 예제와 동일 문법).
+# boto3 는 [bedrock] 확장에 함께 설치되며, 우리 코드에서 직접 쓰지 않는다.
+# Bedrock 베어러 키(api_key) 지원엔 0.99.x 이상 필수.
+anthropic[bedrock]>=0.99
