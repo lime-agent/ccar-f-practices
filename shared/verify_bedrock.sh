@@ -19,5 +19,5 @@ curl -sS -X POST \
   "https://bedrock-runtime.${AWS_REGION}.amazonaws.com/model/${MODEL_ID}/converse" \
   -H "Authorization: Bearer ${AWS_BEARER_TOKEN_BEDROCK}" \
   -H "Content-Type: application/json" \
-  -d '{"messages":[{"role":"user","content":[{"text":"CCA-F 스터디 실습 환경 검증. 한 문장으로 인사해줘."}]}],"inferenceConfig":{"maxTokens":80}}'
+  -d '{"messages":[{"role":"user","content":[{"text":"CCA-F 실습 환경 검증. 한 문장으로 인사해줘."}]}],"inferenceConfig":{"maxTokens":80}}'
 echo
