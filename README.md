@@ -1,9 +1,6 @@
 # CCA-F 실습 모음 (practices)
 
 Claude Certified Architect – Foundations 스터디의 **핸즈온 실습** 모음.
-Claude 구독 없이 **Bedrock API 키 1개**로 실행합니다. (스터디장이 키 배포)
-
-> 이론 교재·슬라이드는 스터디장이 별도로 공유합니다. 이 폴더는 **실행 실습만** 담습니다.
 
 ## 준비 (한 번만)
 ```bash
@@ -19,6 +16,11 @@ AWS_REGION=ap-northeast-2 ./shared/verify_bedrock.sh   # 키 검증(입력값 �
 ```bash
 python -c "from anthropic import AnthropicBedrock; print('ok')"
 ```
+
+## OS별 참고
+- **macOS / Linux**: 위 명령 **그대로** 동작 (둘 다 Unix — venv `bin/activate`·`.sh` 실행 동일).
+- **Windows**: 활성화 경로가 다름 → `.venv\Scripts\activate`. `verify_bedrock.sh`(.sh)는 Git Bash/WSL 필요(또는 `python -c "from shared.bedrock_client import ping; ping()"`로 검증). → **WSL 권장**(리눅스와 동일해짐).
+- 공통 전제: **Python 3.10+** (Tier 2만 Node 18+).
 
 ## 준비 단계 두 가지 (Tier)
 | Tier | 추가 설치 | 대상 |
@@ -49,4 +51,4 @@ python d1-agentic-orchestration/parallel_subagents.py      # 병렬(스레드 �
 
 ## 주의
 - **`.env`(실제 키)는 절대 커밋하지 마세요** — `.gitignore`로 제외돼 있습니다.
-- 키는 각자 로컬에만 두고, 스터디장에게 개별 전달받으세요.
+- 키는 개별 전달받아 각자 로컬 `.env`에만 두세요.
