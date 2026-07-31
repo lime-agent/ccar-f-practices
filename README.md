@@ -9,7 +9,8 @@ python3 -m venv .venv           # 최초 1회
 source .venv/bin/activate       # 터미널 새로 열 때마다 (프롬프트에 (.venv) 표시)
 pip install -r shared/requirements.txt
 
-cp shared/.env.example .env     # .env 열어 AWS_BEARER_TOKEN_BEDROCK 채우기 (⚠️ 커밋 금지!)
+cp shared/.env.example .env     
+nano .env  #.env 열어 AWS_BEARER_TOKEN_BEDROCK 채우기 (⚠️ 커밋 금지!)
 AWS_REGION=ap-northeast-2 ./shared/verify_bedrock.sh   # 키 검증(입력값 파일에 안 남김)
 ```
 설치 확인:
