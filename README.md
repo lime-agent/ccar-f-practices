@@ -1,6 +1,6 @@
 # CCA-F 실습 모음 (practices)
 
-Claude Certified Architect – Foundations 스터디의 **핸즈온 실습** 모음.
+Claude Certified Architect – Foundations(CCA-F) **핸즈온 실습 코드** 모음.
 
 ## 준비 (한 번만)
 ```bash
