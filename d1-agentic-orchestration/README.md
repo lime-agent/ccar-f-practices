@@ -7,7 +7,7 @@
 - **프로그래밍적 강제(게이트)** — critical 로직을 프롬프트가 아니라 코드로 막는다.
 - 멀티에이전트 병렬을 두 방식으로 비교한다: 흉내(스레드) vs 실제(Task).
 
-## 시드 (5개)
+## 시드 (6개)
 | 파일 | 무엇 | 준비물 |
 |---|---|---|
 | `agentic_loop.py` | 에이전틱 루프(`stop_reason` 제어). 툴 호출→결과 주입→`end_turn` 종료 | Tier 1 (`anthropic[bedrock]`) |
@@ -15,6 +15,7 @@
 | `parallel_subagents.py` | 병렬 **흉내** — 파이썬 `ThreadPoolExecutor`로 Claude 호출 3개 동시 | Tier 1 |
 | `parallel_subagents_agentsdk.py` | **진짜 병렬** — 코디네이터가 `Task`를 한 응답에 여러 개 → 런타임 동시 실행 | Tier 2 (Claude Code CLI + `claude-agent-sdk`) |
 | `hooks_demo_agentsdk.py` | **진짜 hooks** — `PreToolUse`(차단)·`PostToolUse`(정규화) 런타임 콜백 | Tier 2 |
+| `session_fork_resume_agentsdk.py` | **세션 관리** — `resume`(이어가기, 제자리) vs `fork_session`(공통 base 독립 분기, 원본 보존) | Tier 2 |
 
 > **강제(enforcement) 두 방식 구분**:
 > - `programmatic_gate.py` = 우리 `execute_tool` 안의 **인라인 강제**(Tier 1). 샘플 **Q1** 직결.
@@ -33,3 +34,4 @@
 - 멈춤은 `stop_reason == "end_turn"` (텍스트 키워드·고정 횟수 ❌)
 - 서브에이전트는 컨텍스트 자동 상속 없음 → 프롬프트로 명시 전달
 - 서브에이전트 스폰엔 `allowedTools`에 `"Task"` 필요, 병렬은 한 응답에 Task 여러 개
+- 세션: `resume`=같은 세션 이어가기(제자리) / `fork_session`=공통 base에서 독립 분기 복제(원본 보존)

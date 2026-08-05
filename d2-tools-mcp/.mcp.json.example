@@ -1,0 +1,22 @@
+{
+  "//": "D2 (Task 2.4) — 외부(stdio) MCP 서버 설정 예시. 프로젝트 루트 .mcp.json 으로 두면 팀 공유·버전관리됨.",
+  "//scope": "프로젝트 스코프(.mcp.json) = 팀 공유 / 사용자 스코프(~/.claude.json) = 개인 전용",
+  "//secrets": "API 키는 값을 직접 넣지 말고 ${ENV_VAR} 로 참조 → 커밋해도 비밀 노출 없음",
+  "mcpServers": {
+    "github": {
+      "type": "stdio",
+      "command": "github-mcp-server",
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "GITHUB_ORG": "${GITHUB_ORG}"
+      }
+    },
+    "postgres": {
+      "type": "stdio",
+      "command": "postgres-mcp-server",
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL}"
+      }
+    }
+  }
+}

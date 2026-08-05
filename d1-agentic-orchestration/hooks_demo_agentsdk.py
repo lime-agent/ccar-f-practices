@@ -13,15 +13,19 @@ programmatic_gate.py 는 우리가 짠 execute_tool 안에서 한 '인라인 강
     pip install claude-agent-sdk
     export CLAUDE_CODE_USE_BEDROCK=1
     export AWS_REGION=ap-northeast-2
-    export ANTHROPIC_MODEL=apac.anthropic.claude-sonnet-4-...
     export AWS_BEARER_TOKEN_BEDROCK=<지급 키>
+    # (선택) export ANTHROPIC_MODEL=<리전 프로파일 ID> — 미설정 시 shared/agent_sdk_config 기본값
 
 실행: practices/ 에서  python d1-agentic-orchestration/hooks_demo_agentsdk.py
 """
 import os
+import sys
 
 import anyio
 from claude_agent_sdk import ClaudeAgentOptions, ClaudeSDKClient, HookMatcher
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+from shared.agent_sdk_config import bedrock_agent_env  # noqa: E402
 
 BLOCK_PATTERN = "prod"   # 정책 예시: 'prod' 포함 명령은 금지
 
@@ -51,16 +55,12 @@ async def post_tool_use(input_data, tool_use_id, context):
 options = ClaudeAgentOptions(
     allowed_tools=["Bash"],
     permission_mode="acceptEdits",
+    setting_sources=[],  # 개인 로컬 설정(~/.claude/settings.json 훅·권한·MCP 등) 미로드 — 재현성 + 개인 훅 로그 노이즈 제거
     hooks={
         "PreToolUse": [HookMatcher(matcher="Bash", hooks=[pre_tool_use])],
         "PostToolUse": [HookMatcher(matcher="Bash", hooks=[post_tool_use])],
     },
-    env={k: v for k, v in {
-        "CLAUDE_CODE_USE_BEDROCK": os.environ.get("CLAUDE_CODE_USE_BEDROCK", "1"),
-        "AWS_REGION": os.environ.get("AWS_REGION", "ap-northeast-2"),
-        "ANTHROPIC_MODEL": os.environ.get("ANTHROPIC_MODEL", ""),
-        "AWS_BEARER_TOKEN_BEDROCK": os.environ.get("AWS_BEARER_TOKEN_BEDROCK", ""),
-    }.items() if v},
+    env=bedrock_agent_env(),
 )
 
 # 하나는 허용(echo hello), 하나는 'prod' 포함이라 PreToolUse 가 차단 → 대비가 보임
