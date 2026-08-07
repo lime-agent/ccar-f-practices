@@ -43,6 +43,7 @@ options = ClaudeAgentOptions(
     allowed_tools=["mcp__orders__get_order_status"],
     permission_mode="acceptEdits",
     setting_sources=[],  # 개인 로컬 설정(~/.claude/settings.json 훅·권한·MCP 등) 미로드 — 재현성 + 개인 훅 로그 노이즈 제거
+    thinking={"type": "disabled"},  # 확장 사고 off — 다중 턴 tool_use 시 'thinking 블록 필요' 400 회피
     env=bedrock_agent_env(),
 )
 

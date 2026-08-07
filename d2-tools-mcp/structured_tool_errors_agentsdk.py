@@ -39,6 +39,8 @@ options = ClaudeAgentOptions(
     mcp_servers={"pay": pay},
     allowed_tools=["mcp__pay__charge_payment"],
     permission_mode="acceptEdits",
+    setting_sources=[],  # 개인 로컬 설정(~/.claude/settings.json 훅·권한·MCP·모델) 미로드 — 재현성
+    thinking={"type": "disabled"},  # 확장 사고 off — 다중 턴 tool_use 시 'thinking 블록 필요' 400 회피
     env=bedrock_agent_env(),
 )
 
