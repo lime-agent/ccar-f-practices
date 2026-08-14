@@ -11,4 +11,5 @@ node_modules/
 package-lock.json
 # 기타
 .DS_Store
-.claude/
+# 저장소 루트의 개인 Claude 설정만 무시(앵커링). D3 데모의 demo/.claude/ 는 교보재라 커밋되어야 함.
+/.claude/
