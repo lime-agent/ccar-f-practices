@@ -13,3 +13,6 @@ package-lock.json
 .DS_Store
 # 저장소 루트의 개인 Claude 설정만 무시(앵커링). D3 데모의 demo/.claude/ 는 교보재라 커밋되어야 함.
 /.claude/
+# mini_harness_example 실행 결과물 (로컬 경로·실행 로그가 들어가므로 커밋 금지)
+mini_harness_example/run_state.json
+mini_harness_example/total.txt
